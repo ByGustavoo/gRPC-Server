@@ -1,12 +1,13 @@
 plugins {
     java
     id("jacoco")
+    id("com.google.protobuf") version "0.9.6"
     id("org.springframework.boot") version "4.1.0"
     id("io.spring.dependency-management") version "1.1.7"
 }
 
 version = "1.0.0"
-group = "br.com.software"
+group = "br.com.grpc.server"
 
 java {
     toolchain {
@@ -31,10 +32,14 @@ dependencies {
 
     // Spring Boot
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    implementation("org.springframework.boot:spring-boot-starter-webmvc")
     implementation("org.springframework.boot:spring-boot-starter-flyway")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-grpc-server")
+
+    // gRPC - Protobuf
+    implementation("io.grpc:grpc-protobuf")
+    implementation("com.google.protobuf:protobuf-java")
 
     // MapStruct
     implementation("org.mapstruct:mapstruct:1.6.3")
@@ -54,19 +59,33 @@ dependencies {
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
 
-    // Swagger
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.2")
-
     // Tests
-    testImplementation("org.mockito:mockito-core:5.12.0")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testImplementation("org.mockito:mockito-junit-jupiter:5.12.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.boot:spring-boot-starter-flyway-test")
-    testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
     testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
     testImplementation("org.springframework.boot:spring-boot-starter-validation-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-grpc-server-test")
+}
 
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:4.36.0-RC2"
+    }
+
+    plugins {
+        named("grpc") {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.83.1"
+        }
+    }
+
+    generateProtoTasks {
+        all().configureEach {
+            plugins {
+                named("grpc")
+            }
+        }
+    }
 }
 
 tasks.withType<Test> {
@@ -87,7 +106,7 @@ tasks.named<JacocoReport>("jacocoTestReport") {
                 fileTree(it) {
                     exclude(
                         "**/config/**",
-                        "**/SpringBootTemplateApplication.class"
+                        "**/ServerApplication.class"
                     )
                 }
             }
