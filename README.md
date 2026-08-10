@@ -5,16 +5,16 @@
 <br> 
 
 <div align="center">
-  Template de projeto Spring Boot desenvolvido para facilitar a criação de novas aplicações, fornecendo uma base sólida, padronizada e reutilizável para futuros desenvolvimentos.
+Servidor gRPC desenvolvido para consolidar os conteúdos das aulas da pós-graduação em Arquitetura e Desenvolvimento Java da FIAP.
 </div> 
 
  <br> 
 
 ## 🚀 Ferramentas Utilizadas
 
-* ☕️ Java 25
+* ☕️ Java 21
 
-* 🟢 Spring Boot 4.0.3
+* 🟢 Spring Boot 4.1.0
   
 <br> 
  
