@@ -70,7 +70,7 @@ dependencies {
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:4.36.0-RC2"
+        artifact = "com.google.protobuf:protoc:4.34.2"
     }
 
     plugins {

@@ -5,8 +5,8 @@
         <map>
           <entry key="DATABASE_IP" value="localhost" />
           <entry key="DATABASE_NAME" value="postgres" />
-          <entry key="DATABASE_PASSWORD" value="postgres" />
-          <entry key="DATABASE_PORT" value="5432" />
+          <entry key="DATABASE_PASSWORD" value="fiap@2026" />
+          <entry key="DATABASE_PORT" value="8745" />
           <entry key="DATABASE_USER" value="postgres" />
         </map>
       </option>
@@ -27,11 +27,8 @@
     </ExternalSystemSettings>
     <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
     <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-    <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
     <DebugAllEnabled>false</DebugAllEnabled>
     <RunAsTest>false</RunAsTest>
-    <GradleProfilingDisabled>false</GradleProfilingDisabled>
-    <GradleCoverageDisabled>false</GradleCoverageDisabled>
     <method v="2" />
   </configuration>
 </component>
