@@ -1,0 +1,13 @@
+CREATE TABLE estoque(
+    id_produto SERIAL PRIMARY KEY,
+    descricao  VARCHAR(255) NOT NULL,
+    quantidade INTEGER NOT NULL DEFAULT 0,
+    disponivel BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+INSERT INTO estoque (descricao, quantidade, disponivel) VALUES
+('ARROZ TIO JOAO 1KG', 50, TRUE),
+('FEIJAO CARIOCA 1KG', 30, TRUE),
+('ACUCAR CRISTAL 1KG', 0, FALSE),
+('OLEO DE SOJA 900ML', 15, TRUE),
+('CAFE PILAO 500G', 0, FALSE);

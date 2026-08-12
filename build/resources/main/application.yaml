@@ -1,18 +1,9 @@
 logging:
   config: classpath:log4j2.xml
 
-server:
-  servlet:
-    context-path: /gRPCServer
-
 spring:
   application:
     name: gRPCServer
-
-  servlet:
-    encoding:
-      charset: UTF-8
-      force: true
 
   jpa:
     open-in-view: false
@@ -20,10 +11,6 @@ spring:
   flyway:
     enabled: true
     baseline-on-migrate: true
-
-  web:
-    error:
-      include-stacktrace: never
 
 ---
 
@@ -37,13 +24,14 @@ spring:
       hibernate:
         format_sql: true
 
+  grpc:
+    server:
+      port: 9017
+
 logging:
   level:
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-
-server:
-  port: 9017
 
 ---
 
@@ -52,12 +40,6 @@ spring:
     activate:
       on-profile: prod
 
-server:
-  port: 9027
-
----
-
-spring:
-  config:
-    activate:
-      on-profile: test
+  grpc:
+    server:
+      port: 9027

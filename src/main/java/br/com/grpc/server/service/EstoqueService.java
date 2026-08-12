@@ -1,24 +1,24 @@
 package br.com.grpc.server.service;
 
-import br.com.grpc.server.estoque.ConsultarEstoqueRequest;
-import br.com.grpc.server.estoque.ConsultarEstoqueResponse;
-import br.com.grpc.server.estoque.EstoqueServiceGrpc.EstoqueServiceImplBase;
-import io.grpc.stub.StreamObserver;
+import br.com.grpc.server.model.dto.EstoqueDTO;
+import br.com.grpc.server.repository.EstoqueRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
-public class EstoqueService extends EstoqueServiceImplBase {
+@RequiredArgsConstructor
+public class EstoqueService {
 
-    @Override
-    public void consultarEstoque(ConsultarEstoqueRequest request, StreamObserver<ConsultarEstoqueResponse> responseObserver) {
-        var response = ConsultarEstoqueResponse.newBuilder()
-                .setIdProduto(request.getIdProduto())
-                .setDescricao("Produto teste")
-                .setQuantidade(10)
-                .setDisponivel(true)
-                .build();
+    private final EstoqueRepository estoqueRepository;
 
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
+    public Optional<EstoqueDTO> consultarEstoqueByProdutoId(Integer produtoId) {
+        return estoqueRepository.findById(produtoId)
+                .map(estoque -> new EstoqueDTO(
+                        estoque.getProdutoId(),
+                        estoque.getDescricao(),
+                        estoque.getQuantidade(),
+                        estoque.getDisponivel()));
     }
 }
