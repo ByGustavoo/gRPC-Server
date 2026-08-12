@@ -12,7 +12,11 @@ Servidor gRPC desenvolvido para consolidar os conteúdos das aulas da pós-gradu
 
 ## 🚀 Ferramentas Utilizadas
 
+* ⚡ gRPC
+  
 * ☕️ Java 21
+  
+* 🗄️ PostgreSQL
 
 * 🟢 Spring Boot 4.1.0
   
