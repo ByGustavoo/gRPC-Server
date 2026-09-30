@@ -21,6 +21,8 @@ public class EstoqueGrpcService extends EstoqueServiceImplBase {
 
     @Override
     public void consultarEstoque(ConsultarEstoqueRequest request, StreamObserver<ConsultarEstoqueResponse> responseObserver) {
+        log.info("Requisição gRPC recebida: ConsultarEstoque - ID Produto: [{}]", request.getIdProduto());
+
         try {
             var estoque = buscarEstoque(request);
 
@@ -33,8 +35,11 @@ public class EstoqueGrpcService extends EstoqueServiceImplBase {
 
             responseObserver.onNext(response);
             responseObserver.onCompleted();
+
+            log.info("Estoque do Produto enviado com sucesso! - ID: [{}] - Quantidade: [{}] - Disponível: [{}]",
+                    estoque.produtoId(), estoque.quantidade(), estoque.disponivel());
         } catch (StatusRuntimeException ex) {
-            log.error("O Produto solicitado não foi encontrado! - ID: [{}]", request.getIdProduto());
+            log.warn("O Produto solicitado não foi encontrado! - ID: [{}]", request.getIdProduto());
             responseObserver.onError(ex);
         }
     }
